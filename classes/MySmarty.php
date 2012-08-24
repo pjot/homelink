@@ -1,5 +1,5 @@
 <?php
-require dirname(__FILE__) . '/smarty/Smarty.class.php';
+require dirname(__FILE__) . '/../smarty/Smarty.class.php';
 class MySmarty extends Smarty
 {
     public function __construct()
