@@ -1,4 +1,4 @@
-{if $banner}
+{if isset($banner)}
 	<div class="fade in alert alert-{$banner.type}">
 		{$banner.text}
 		<a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -6,7 +6,7 @@
 {/if}
 <table class="table table-striped table-bordered">
     <tbody>
-	{if $useBack}
+	{if isset($useBack) && $useBack}
 		<tr>
 			<td>
 				<a class="btn btn-primary" href="{$baseUrl}?action=seed">

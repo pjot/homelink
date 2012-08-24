@@ -6,20 +6,21 @@ class Homelink
 
     public static function getConfig($config)
     {
-        return self::$config[$config];
+        self::loadConfig();
+        return self::$config[strtolower($config)];
     }
 
     private static function loadConfig()
     {
         if ( ! isset(self::$config))
         {
-            self::$config = parse_ini_file(dirname(___FILE___));
+            self::$config = parse_ini_file(dirname(__FILE__) . '/../config.ini');
         }
     }
 
 	private static function redirect($action)
 	{
-		header('Location: ' . self::BASE_URL . '?action=' . $action);
+		header('Location: ' . self::getConfig('BASE_URL') . '?action=' . $action);
 		exit;
 	}
 
@@ -94,12 +95,12 @@ class Homelink
 
 	private function actionSeed()
 	{
-		$folder = self::getConfig('SEED_PATH') . (isset($_GET['folder']) ? preg_replace('/\.\.\/?/', '', $_GET['folder']) : '');
+		$folder = self::getConfig('SEED_PATH') . '/' . (isset($_GET['folder']) ? preg_replace('/\.\.\/?/', '', $_GET['folder']) : '');
 		$directory = new DirectoryLister($folder);
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
-		    $entries[] = new SeedEntry($folder . $file);
+		    $entries[] = new SeedEntry($folder . '/' . $file);
 		}
 		usort($entries, array('Entry', 'sort'));
 		$view = new FileView();
@@ -113,7 +114,7 @@ class Homelink
 
 	private function actionView()
 	{
-		$directory = new DirectoryLister(self::getConfig'(VIEW_PATH'));
+		$directory = new DirectoryLister(self::getConfig('VIEW_PATH'));
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
