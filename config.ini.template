@@ -1,0 +1,5 @@
+# These four values must be set for this to work properly
+BASE_URL = "http://asd.se"
+TORRENT_PATH = "/home/pjot/Downloads/"
+SEED_PATH = "/media/store/tmp/"
+VIEW_PATH = "/media/store/share/"
