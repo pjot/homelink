@@ -2,21 +2,21 @@
 class Homelink
 {
 	private $action = null;
-    private static $config = null;
+	private static $config = null;
 
-    public static function getConfig($config)
-    {
-        self::loadConfig();
-        return self::$config[strtolower($config)];
-    }
+	public static function getConfig($config)
+	{
+		self::loadConfig();
+		return self::$config[strtoupper($config)];
+	}
 
-    private static function loadConfig()
-    {
-        if ( ! isset(self::$config))
-        {
-            self::$config = parse_ini_file(dirname(__FILE__) . '/../config.ini');
-        }
-    }
+	private static function loadConfig()
+	{
+		if ( ! isset(self::$config))
+		{
+			self::$config = parse_ini_file(dirname(__FILE__) . '/../config.ini');
+		}
+	}
 
 	private static function redirect($action)
 	{
@@ -41,8 +41,7 @@ class Homelink
 	private function getMenu()
 	{
 		$menu = new MySmarty();
-		$menu->assign('items',
-			array(
+		$menu->assign('items', array(
 			'seed' => array(
 				'name' => 'Seeding',
 				'active' => $this->action == 'seed',
@@ -67,8 +66,7 @@ class Homelink
 				'url' => self::getconfig('BASE_URL') . '?action=torrent',
 				'icon' => 'icon-download-alt',
 			)
-		    )
-		);
+		));
 		return $menu->fetch('Menu.tpl');
 	}
 	private function getAction()
@@ -95,12 +93,16 @@ class Homelink
 
 	private function actionSeed()
 	{
-		$folder = self::getConfig('SEED_PATH') . '/' . (isset($_GET['folder']) ? preg_replace('/\.\.\/?/', '', $_GET['folder']) : '');
+		$folder = self::getConfig('SEED_PATH') . '/' . (
+			isset($_GET['folder']) 
+				? preg_replace('/\.\.\/?/', '', $_GET['folder']) 
+				: ''
+		);
 		$directory = new DirectoryLister($folder);
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
-		    $entries[] = new SeedEntry($folder . '/' . $file);
+			$entries[] = new SeedEntry($folder . '/' . $file);
 		}
 		usort($entries, array('Entry', 'sort'));
 		$view = new FileView();
@@ -118,7 +120,7 @@ class Homelink
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
-		    $entries[] = new ViewEntry(self::getConfig('VIEW_PATH') . $file);
+			$entries[] = new ViewEntry(self::getConfig('VIEW_PATH') . $file);
 		}
 		usort($entries, array('Entry', 'sort'));
 		$view = new FileView();
