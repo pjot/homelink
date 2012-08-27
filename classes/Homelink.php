@@ -137,6 +137,11 @@ class Homelink
 	{
 		$view = new TorrentView();
 		$view->addRows(Deluge::getInfo());
+		if (isset($_SESSION['banner']))
+		{
+			$view->setBanner($_SESSION['banner']);
+			unset($_SESSION['banner']);
+		}
 		$this->view->assign('content', $view->fetch());
 	}
 
@@ -182,7 +187,29 @@ class Homelink
 
 	private function actionTorrent()
 	{
-		echo 'ecT';
+		if ($_POST['torrent_url'])
+		{
+			if (TorrentDownloader::getUrl($_POST['torrent_url']))
+			{
+				$_SESSION['banner'] = array(
+					'type' => 'success',
+					'text' => 'Successfully added torrent.',
+				);
+			}
+			else
+			{
+				$_SESSION['banner'] = array(
+					'type' => 'error',
+					'text' => 'Something went wrong when adding torrent',
+				);
+			}
+			self::redirect('deluge');
+		}
+		else
+		{
+			$formView = new TorrentFormView();
+			$this->view->assign('content', $formView->fetch());
+		}	
 	}
 	private function displayView()
 	{

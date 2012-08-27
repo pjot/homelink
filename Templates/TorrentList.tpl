@@ -1,3 +1,9 @@
+{if isset($banner)}
+	<div class="fade in alert alert-{$banner.type}">
+		{$banner.text}
+		<a href="#" class="close" data-dismiss="alert">&times;</a>
+	</div>
+{/if}
 <table class="table table-striped table-bordered">
     <tbody>
         {foreach $rows as $row}
