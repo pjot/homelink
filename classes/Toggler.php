@@ -10,7 +10,7 @@ class Toggler
 		}
 		$parts = explode('/', $file);
 		$filename = $parts[count($parts) - 1];
-		return link($file, Homelink::getConfig('VIEW_PATH') . $filename);
+		return link($file, Config::get('VIEW_PATH') . $filename);
 	}
 
 	public static function removeLink($link)
