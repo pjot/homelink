@@ -19,10 +19,8 @@
 	</script>
     </head>
     <body>
-        <br />
         <div class="container">
-            {$menu}
-		<br />
+	    {$menu}
             {$content}
         </div>
     </body>
