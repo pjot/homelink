@@ -8,6 +8,6 @@ class MySmarty extends Smarty
         $this->setTemplateDir('Templates');
         $this->setCacheDir('Cache/Smarty/Cache');
         $this->setCompileDir('Cache/Smarty/Compiled');
-        $this->assign('baseUrl', Config::get('BASE_URL'));
+        $this->assign('baseUrl', Config::get('base_url'));
     }
 }

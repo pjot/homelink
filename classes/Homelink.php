@@ -5,7 +5,7 @@ class Homelink
 	
 	private static function redirect($action)
 	{
-		header('Location: ' . Config::get('BASE_URL') . '?action=' . $action);
+		header('location: ' . config::get('base_url') . '?action=' . $action);
 		exit;
 	}
 
@@ -30,25 +30,25 @@ class Homelink
 			'seed' => array(
 				'name' => 'Seeding',
 				'active' => $this->action == 'seed',
-				'url' =>  Config::get('BASE_URL') . '?action=seed',
+				'url' =>  Config::get('base_url') . '?action=seed',
 				'icon' => 'icon-hdd',
 			),
 			'view' => array(
 				'name' => 'Viewing',
 				'active' => $this->action == 'view',
-				'url' => Config::get('BASE_URL') . '?action=view',
+				'url' => Config::get('base_url') . '?action=view',
 				'icon' => 'icon-film',
 			),
 			'deluge' => array(
 				'name' => 'Downloading',
 				'active' => $this->action == 'deluge',
-				'url' => Config::get('BASE_URL') . '?action=deluge',
+				'url' => Config::get('base_url') . '?action=deluge',
 				'icon' => 'icon-tasks',
 			),
 			'torrent' => array(
 				'name' => 'Add Torrent',
 				'active' => $this->action == 'torrent',
-				'url' => Config::get('BASE_URL') . '?action=torrent',
+				'url' => Config::get('base_url') . '?action=torrent',
 				'icon' => 'icon-download-alt',
 			)
 		));
@@ -78,7 +78,7 @@ class Homelink
 
 	private function actionSeed()
 	{
-		$folder = Config::get('SEED_PATH') . '/' . (
+		$folder = Config::get('seed_path') . '/' . (
 			isset($_GET['folder']) 
 				? preg_replace('/\.\.\/?/', '', $_GET['folder']) 
 				: ''
@@ -101,11 +101,11 @@ class Homelink
 
 	private function actionView()
 	{
-		$directory = new DirectoryLister(Config::get('VIEW_PATH'));
+		$directory = new DirectoryLister(Config::get('view_path'));
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
-			$entries[] = new ViewEntry(Config::get('VIEW_PATH') . $file);
+			$entries[] = new ViewEntry(Config::get('view_path') . $file);
 		}
 		usort($entries, array('Entry', 'sort'));
 		$view = new FileView();
@@ -133,7 +133,7 @@ class Homelink
 	private function actionToggle()
 	{
 		$target = preg_replace('/\.\.\/?/', '', $_GET['target']);
-		if (strpos($target, Config::get('SEED_PATH')) !== false)
+		if (strpos($target, Config::get('seed_path')) !== false)
 		{
 			if (Toggler::makeLink($target))
 			{
@@ -150,7 +150,7 @@ class Homelink
 				);
 			}
 		}
-		if (strpos($target, Config::get('VIEW_PATH')) !== false)
+		if (strpos($target, Config::get('view_path')) !== false)
 		{
 			if (Toggler::removeLink($target))
 			{

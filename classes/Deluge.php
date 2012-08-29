@@ -4,7 +4,7 @@ class Deluge
 {
 	public static function addFile($file)
 	{
-		$command = 'deluge-console "add -p ' . Config::get('SEED_PATH') . ' ' . $file . '"';
+		$command = 'deluge-console "add -p ' . Config::get('seed_path') . ' ' . $file . '"';
 		$ret = shell_exec($command);
 		return preg_match('/Torrent\sadded!\n$/m', $ret) === 1;
 	}
