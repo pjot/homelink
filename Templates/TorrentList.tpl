@@ -4,6 +4,9 @@
 		<a href="#" class="close" data-dismiss="alert">&times;</a>
 	</div>
 {/if}
+{if count($rows) == 0}
+	No downloads at the moment.
+{else}
 <table class="table table-striped table-bordered">
     <tbody>
         {foreach $rows as $row}
@@ -19,3 +22,4 @@
         {/foreach}
     </tbody>
 </table>
+{/if}
