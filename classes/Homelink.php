@@ -22,6 +22,7 @@ class Homelink
 	{
 		$this->view = new MySmarty();
 		$this->view->assign('menu', $this->getMenu());
+
 	}
 	private function getMenu()
 	{
@@ -78,6 +79,20 @@ class Homelink
 
 	private function actionSeed()
 	{
+		if ($_GET['goto'] === 'up' && isset($_GET['folder']))
+		{
+			if ( ! preg_match('/\//', $_GET['folder']))
+			{
+				$url = Config::get('base_url') . '?action=seed';
+			}
+			else
+			{
+				$folder = preg_replace('/\/.*$/', '', $_GET['folder']);
+				$url = Config::get('base_url') . '?action=seed&folder=' . $folder;
+			}
+			header('Location: ' . $url);
+			exit;
+		}
 		$folder = Config::get('seed_path') . '/' . (
 			isset($_GET['folder']) 
 				? preg_replace('/\.\.\/?/', '', $_GET['folder']) 

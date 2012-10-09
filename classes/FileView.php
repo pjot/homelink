@@ -10,6 +10,7 @@ class FileView extends View
 	public function useBack()
 	{
 		$this->smarty->assign('useBack', true);
+		$this->smarty->assign('basePath', $_GET['folder']);
 	}
 	public function setBanner($banner)
 	{

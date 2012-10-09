@@ -9,7 +9,7 @@
 	{if isset($useBack) && $useBack}
 		<tr>
 			<td>
-				<a class="btn btn-primary" href="{$baseUrl}?action=seed">
+				<a class="btn btn-primary" href="{$baseUrl}?action=seed&folder={$basePath}&goto=up">
 					<i class="icon-chevron-up icon-white"></i>
 				</a>
 				<strong>Up one level</strong>
@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     {if $row->type == Entry::DIR}
-			<a class="btn btn-primary" href="{$baseUrl}?action=seed&folder={$row->name}">
+			<a class="btn btn-primary" href="{$baseUrl}?action=seed&folder={if isset($useBack) && $useBack}{$basePath}/{/if}{$row->name}">
      		    {else}
                         <a class="btn {$row->btn_class}" href="{$baseUrl}?action=toggle&target={$row->target}">
                     {/if}
