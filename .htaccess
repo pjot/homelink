@@ -1,0 +1,5 @@
+<Files ~ "(ini|template|md)$">
+	order allow,deny
+	allow from none
+	deny from all
+</Files>
