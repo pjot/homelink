@@ -6,6 +6,7 @@ class Entry
 	const FILE = 2;
 
 	public $dir_button = 'btn-info';
+	public $btn_class = '';
 
 	public function __construct($entry)
 	{
