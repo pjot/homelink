@@ -79,7 +79,7 @@ class Homelink
 
 	private function actionSeed()
 	{
-		if ($_GET['goto'] === 'up' && isset($_GET['folder']))
+		if (isset($_GET['goto']) && $_GET['goto'] === 'up' && isset($_GET['folder']))
 		{
 			if ( ! preg_match('/\//', $_GET['folder']))
 			{
@@ -187,7 +187,7 @@ class Homelink
 
 	private function actionTorrent()
 	{
-		if ($_POST['torrent_url'])
+		if (isset($_POST['torrent_url']))
 		{
 			if (TorrentDownloader::getUrl($_POST['torrent_url']))
 			{
