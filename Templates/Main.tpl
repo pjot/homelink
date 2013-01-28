@@ -21,8 +21,12 @@
     <body>
         <div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span6">
+			<div class="span8">
 			    {$menu}
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
 		            {$content}
 			</div>
 		</div>
