@@ -12,10 +12,16 @@
 		{foreach $rows as $row}
 		    <tr>
 			<td>
-				<div class="progress progress-striped progress-info span4"><div class="bar" style="width: {$row->progress}%;"></div></div>
-				<div class="span8">
-				<i class="icon-time"></i> {$row->eta}
-				<i class="icon-file"></i> {$row->name}
+				<div class="clearfix">
+					<div class="progress progress-striped progress-info span6">
+						<div class="bar" style="width: {$row->progress}%;"></div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<i class="icon-time"></i> {$row->eta}
+				</div>
+				<div class="clearfix">
+					<i class="icon-file"></i> {$row->name}
 				</div>
 			</td>
 		    </tr>

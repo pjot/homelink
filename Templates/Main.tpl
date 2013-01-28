@@ -19,9 +19,13 @@
 	</script>
     </head>
     <body>
-        <div class="container">
-	    {$menu}
-            {$content}
+        <div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span6">
+			    {$menu}
+		            {$content}
+			</div>
+		</div>
         </div>
     </body>
 </html>
