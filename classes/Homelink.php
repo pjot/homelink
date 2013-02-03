@@ -57,14 +57,15 @@ class Homelink
 	}
 	private function getAction()
 	{
-		switch ($_GET['action'])
+		$action = isset($_GET['action']) ? $_GET['action'] : '';
+		switch ($action)
 		{
 			case 'seed':
 			case 'view':
 			case 'deluge':
 			case 'torrent':
 			case 'toggle':
-				$this->action = $_GET['action'];
+				$this->action = $action;
 				break;
 			default:
 				$this->action = 'view';

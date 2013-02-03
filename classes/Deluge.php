@@ -16,7 +16,8 @@ class Deluge
 		$out = array();
 		foreach ($info_array as $torrent)
 		{
-			if ( ! preg_match('/^\s(?<name>.*)\n.*\n.*ETA:\s(?<eta>.*)\n.*\n.*\nProgress:\s(?<progress>\d+)\.\d+%/m', $torrent, $matches))
+			$ret = preg_match('/^(?<name>.*)\n.*\n.*ETA:\s(?<eta>.*)\n.*\n.*\n.*\n.*\nProgress:\s(?<progress>\d+)\.\d+%/m', $torrent, $matches);
+			if ( ! $ret)
 			{
 				continue;
 			}			
