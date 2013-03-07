@@ -5,7 +5,7 @@ class Homelink
 	
 	private static function redirect($action)
 	{
-		header('location: ' . config::get('base_url') . '?action=' . $action);
+		header('location: ' . Config::get('base_url') . '?action=' . $action);
 		exit;
 	}
 
@@ -57,7 +57,7 @@ class Homelink
 	}
 	private function getAction()
 	{
-		$action = isset($_GET['action']) ? $_GET['action'] : '';
+		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 		switch ($action)
 		{
 			case 'seed':
@@ -65,6 +65,7 @@ class Homelink
 			case 'deluge':
 			case 'torrent':
 			case 'toggle':
+            case 'upload':
 				$this->action = $action;
 				break;
 			default:
@@ -137,7 +138,7 @@ class Homelink
 	private function actionDeluge()
 	{
 		$view = new TorrentView();
-		$view->addRows(Deluge::getInfo());
+		$view->addRows(Transmission::getInfo());
 		if (isset($_SESSION['banner']))
 		{
 			$view->setBanner($_SESSION['banner']);
@@ -188,30 +189,33 @@ class Homelink
 
 	private function actionTorrent()
 	{
-		if (isset($_POST['torrent_url']))
-		{
-			if (TorrentDownloader::getUrl($_POST['torrent_url']))
-			{
-				$_SESSION['banner'] = array(
-					'type' => 'success',
-					'text' => 'Successfully added torrent.',
-				);
-			}
-			else
-			{
-				$_SESSION['banner'] = array(
-					'type' => 'error',
-					'text' => 'Something went wrong when adding torrent',
-				);
-			}
-			self::redirect('deluge');
-		}
-		else
-		{
-			$formView = new TorrentFormView();
-			$this->view->assign('content', $formView->fetch());
-		}	
+        $formView = new TorrentFormView();
+        $this->view->assign('content', $formView->fetch());
+    }
+
+    private function actionUpload()
+    {
+        if (empty($_REQUEST['url']))
+        {
+            self::redirect('torrent');
+        }
+        if (TorrentDownloader::getUrl($_REQUEST['url']))
+        {
+            $_SESSION['banner'] = array(
+                'type' => 'success',
+                'text' => 'Successfully added torrent.',
+            );
+        }
+        else
+        {
+            $_SESSION['banner'] = array(
+                'type' => 'error',
+                'text' => 'Something went wrong when adding torrent',
+            );
+        }
+        self::redirect('deluge');
 	}
+
 	private function displayView()
 	{
 		$this->view->display('Main.tpl');

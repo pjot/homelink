@@ -13,8 +13,8 @@
 		    <tr>
 			<td>
 				<div class="clearfix">
-					<div class="progress progress-striped progress-info span6">
-						<div class="bar" style="width: {$row->progress}%;"></div>
+					<div class="progress progress-striped progress-info span6" style="min-height: 18px;">
+						<div class="bar" style="width: {$row->progress};"></div>
 					</div>
 				</div>
 				<div class="clearfix">
@@ -23,6 +23,12 @@
 				<div class="clearfix">
 					<i class="icon-file"></i> {$row->name}
 				</div>
+                <div class="clearfix">
+                    {$row->status}
+                </div>
+                <div class="clearfix">
+                    {$row->speed}kB/s
+                </div>
 			</td>
 		    </tr>
 		{/foreach}

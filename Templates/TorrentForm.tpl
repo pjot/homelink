@@ -2,9 +2,11 @@
 <tbody>
 <tr>
 <td>
-<form method="POST" action="{$baseUrl}?action=torrent" style="margin: 0;">
+<form action="{$baseUrl}">
 	<div class="input-append">
-		<input type="text" placeholder="Torrent URL" name="torrent_url" /><button type="submit" class="btn"><i class="icon-download-alt"></i> Download</button>
+        <input type="hidden" name="action" value="upload" />
+		<input type="text" name="url" />
+        <input type="submit" class="btn" value="Download" />
 	</div>
 </form>
 </td>
