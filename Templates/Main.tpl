@@ -16,6 +16,12 @@
 	<script type="text/javascript" src="{$baseUrl}/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$('.alert').alert();
+        $(document).ready(function () {
+            $('.subtitles_button').click(function () {
+                $(this).parent().find('.subtitles_form').toggle();
+                return false;
+            });
+        });
 	</script>
     </head>
     <body>

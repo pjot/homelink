@@ -51,7 +51,13 @@ class Homelink
 				'active' => $this->action == 'torrent',
 				'url' => Config::get('base_url') . '?action=torrent',
 				'icon' => 'icon-download-alt',
-			)
+            ),
+            'subtitles' => array(
+                'name' => 'Subtitles',
+                'active' => $this->action == 'subtitles',
+                'url' => Config::get('base_url') . '?action=subtitles',
+                'icon' => 'icon-comment',
+            ),
 		));
 		return $menu->fetch('Menu.tpl');
 	}
@@ -66,6 +72,9 @@ class Homelink
 			case 'torrent':
 			case 'toggle':
             case 'upload':
+            case 'subtitles':
+            case 'unqueue':
+            case 'worker':
 				$this->action = $action;
 				break;
 			default:
@@ -78,6 +87,53 @@ class Homelink
 	{
 		$this->{'action' . ucfirst($this->action)}();
 	}
+
+    private function actionWorker()
+    {
+        $files = array();
+        if (isset($_FILES['subtitles_file']) && $_FILES['subtitles_file']['error'] === UPLOAD_ERR_OK)
+        {
+            $file_name = Config::get('torrent_path') . md5(serialize($_FILES));
+            move_uploaded_file($_FILES['subtitles_file']['tmp_name'], $file_name);
+            $files[] = $file_name;
+        }
+        $files[] = $_POST['media_file'];
+        $worker = new BackgroundJob(Config::get('seed_path') . $_POST['out_file'], $files);
+        $worker->start();
+        $this->redirect('subtitles');
+    }
+
+    private function actionUnqueue()
+    {
+        if (isset($_GET['id']) && strlen($_GET['id']) == 32)
+        {
+            BackgroundJob::removeFromArrayFile($_GET['id']);
+            $_SESSION['banner'] = array(
+                'type' => 'success',
+                'text' => 'Sucessfully removed worker.',
+            );
+        }
+        else
+        {
+            $_SESSION['banner'] = array(
+                'type' => 'error',
+                'text' => 'Something went wrong.',
+            );
+        }
+        $this->redirect('subtitles');
+    }
+
+    private function actionSubtitles()
+    {
+		$view = new SubtitlesView();
+		$view->addRows(BackgroundJob::getRunningJobs());
+		if (isset($_SESSION['banner']))
+		{
+			$view->setBanner($_SESSION['banner']);
+			unset($_SESSION['banner']);
+		}
+		$this->view->assign('content', $view->fetch());
+    }
 
 	private function actionSeed()
 	{
@@ -95,7 +151,7 @@ class Homelink
 			header('Location: ' . $url);
 			exit;
 		}
-		$folder = Config::get('seed_path') . '/' . (
+		$folder = Config::get('seed_path') . (
 			isset($_GET['folder']) 
 				? preg_replace('/\.\.\/?/', '', $_GET['folder']) 
 				: ''
@@ -104,7 +160,7 @@ class Homelink
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
-			$entries[] = new SeedEntry($folder . '/' . $file);
+			$entries[] = new SeedEntry($folder . $file);
 		}
 		usort($entries, array('Entry', 'sort'));
 		$view = new FileView();
@@ -138,7 +194,7 @@ class Homelink
 	private function actionDeluge()
 	{
 		$view = new TorrentView();
-		$view->addRows(Transmission::getInfo());
+		$view->addRows(Deluge::getInfo());
 		if (isset($_SESSION['banner']))
 		{
 			$view->setBanner($_SESSION['banner']);
