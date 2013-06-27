@@ -1,7 +1,7 @@
 {if isset($banner)}
-	<div class="fade in alert alert-{$banner.type}">
+	<div class="banner banner-{$banner.type}">
 		{$banner.text}
-		<a href="#" class="close" data-dismiss="alert">&times;</a>
+		<a href="#" class="close">&times;</a>
 	</div>
 {/if}
 
