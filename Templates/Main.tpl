@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{$baseUrl}/bootstrap/css/bootstrap.min.css">
+        <link rel="icon" href="{$baseUrl}/favicon.ico" />
         <style>
             td {
                 vertical-align: baseline!important;
