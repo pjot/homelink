@@ -160,7 +160,7 @@ class Homelink
 		$entries = array();
 		foreach ($directory->getFiles() as $file)
 		{
-			$entries[] = new SeedEntry($folder . $file);
+			$entries[] = new SeedEntry($folder . '/' . $file);
 		}
 		usort($entries, array('Entry', 'sort'));
 		$view = new FileView();

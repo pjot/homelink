@@ -6,7 +6,12 @@ class Deluge
 	{
 		$command = 'deluge-console "add -p ' . Config::get('seed_path') . ' ' . $file . '"';
 		$ret = shell_exec($command);
-		return preg_match('/Torrent\sadded!\n$/m', $ret) === 1;
+		$success = preg_match('/Torrent\sadded!\n$/m', $ret) === 1;
+		if ( ! $success)
+		{
+			error_log('Error when adding torrent: ' . $ret);
+		}
+		return $success;
 	}
 
 	public static function getInfo()
