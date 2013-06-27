@@ -1,6 +1,6 @@
-<div class="btn-group" style="padding-bottom: 10px; padding-top: 10px;">
+<div id="menu">
     {foreach $items as $item}
-	<a class="btn btn-large{if $item.active} btn-primary{/if}" href="{$item.url}">
+	<a class="item{if $item.active} active{/if}" href="{$item.url}">
 		<i class="{$item.icon}{if $item.active} icon-white{/if}"></i> {$item.name}
 	</a>
     {/foreach}

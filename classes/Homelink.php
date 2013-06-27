@@ -100,6 +100,10 @@ class Homelink
         $files[] = $_POST['media_file'];
         $worker = new BackgroundJob(Config::get('seed_path') . $_POST['out_file'], $files);
         $worker->start();
+        $_SESSION['banner'] = array(
+            'type' => 'success',
+            'text' => 'Sucessfully added worker.',
+        );
         $this->redirect('subtitles');
     }
 

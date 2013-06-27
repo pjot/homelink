@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{$baseUrl}/bootstrap/css/bootstrap.min.css">
-        <link rel="icon" href="{$baseUrl}/favicon.ico" />
+        <link rel="stylesheet" href="static/pjotpi.css" />
+        <link rel="stylesheet" href="static/icons.css" />
+        <link rel="icon" href="static/favicon.ico" />
         <style>
             td {
                 vertical-align: baseline!important;
@@ -14,30 +15,23 @@
 		}
         </style>
 	<script type="text/javascript" src="{$baseUrl}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="{$baseUrl}/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$('.alert').alert();
         $(document).ready(function () {
             $('.subtitles_button').click(function () {
                 $(this).parent().find('.subtitles_form').toggle();
+                return false;
+            });
+            $('.banner .close').click(function () {
+                $(this).parent().hide();
                 return false;
             });
         });
 	</script>
     </head>
     <body>
-        <div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span8">
-			    {$menu}
-			</div>
-		</div>
-		<div class="row-fluid">
-			<div class="span12">
-		            {$content}
-			</div>
-		</div>
-        </div>
+        {$menu}
+        <div class="clearfix"></div>
+        {$content}
     </body>
 </html>
 

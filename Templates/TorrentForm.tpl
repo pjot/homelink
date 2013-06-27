@@ -1,15 +1,10 @@
-<table class="table table-striped table-bordered">
-<tbody>
-<tr>
-<td>
-<form action="{$baseUrl}">
-	<div class="input-append">
+<div id="torrentform">
+    <form action="{$baseUrl}">
         <input type="hidden" name="action" value="upload" />
-		<input type="text" name="url" />
-        <input type="submit" class="btn" value="Download" />
-	</div>
-</form>
-</td>
-</tr>
-</tbody>
-</table>
+
+        <label for="url">URL</label>        
+        <input type="text" name="url" />
+
+        <input type="submit" class="button" value="Download" />
+    </form>
+</div>

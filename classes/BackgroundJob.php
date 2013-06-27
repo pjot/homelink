@@ -104,6 +104,8 @@ class BackgroundJob
             $job = new stdClass;
             $job->id = $row_data[0];
             $job->name = $row_data[1];
+            $parts = explode('/', $job->name);
+            $job->file_name = array_pop($parts);
             $job->progress = self::getRunningStatus($job->id);
             $jobs[] = $job;
         }

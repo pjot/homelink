@@ -1,10 +1,10 @@
 {if isset($banner)}
-	<div class="fade in alert alert-{$banner.type}">
+	<div class="banner banner-{$banner.type}">
 		{$banner.text}
-		<a href="#" class="close" data-dismiss="alert">&times;</a>
+		<a href="#" class="close">&times;</a>
 	</div>
 {/if}
-<table class="table table-striped table-bordered">
+<table class="list" border="0" cellspacing="0">
     <tbody>
 	{if count($rows) == 0}
 		<tr><td>No downloads at the moment.</td></tr>

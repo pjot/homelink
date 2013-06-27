@@ -1,0 +1,197 @@
+@font-face
+{
+    font-family: pjot-pi;
+    src: url('fonts/Hattori_Hanzo.otf');
+}
+
+body
+{
+    line-height: 18px;
+    font-size: 13pt;
+    font-family: pjot-pi;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+.clearfix:before,
+.clearfix:after
+{
+    display: table;
+    content: "";
+}
+
+.clearfix:after
+{
+    clear: both;
+}
+
+#menu
+{
+    margin: 10px;
+}
+
+#menu .item
+{
+    padding: 10px;
+    border-right: 10px solid white;
+    float: left;
+    background-color: #ddd;
+    color: #222;
+}
+
+#menu .item:hover, 
+#menu .item.active:hover
+{
+    background-color: #4cc82a;
+    color: #222;
+    text-decoration: none;
+}
+
+#menu .item.active
+{
+    background-color: #2aa608; 
+    color: white;
+}
+
+.banner
+{
+    padding: 10px;
+    margin: 10px 10px 0 10px;
+    width: 680px;
+    color: white;
+}
+
+.banner.banner-success
+{
+    background-color: #2aa608;
+}
+
+.banner a.close
+{
+    color: white;
+    margin-left: auto;
+    margin-right: 10px;
+    float: right;
+}
+
+table.list
+{
+    margin: 10px;
+    width: 700px;
+}
+
+table.list td
+{
+    padding: 11px 7px 10px;
+}
+
+table.list tr:nth-child(even)
+{
+    background-color: #eee;
+}
+
+table.list tr:nth-child(odd)
+{
+    background-color: #e2e2e2;
+}
+
+.button
+{
+    padding: 6px 4px 4px 7px;
+    background-color: #2aa608;
+    margin-right: 10px;
+    text-decoration: none;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 0;
+}
+
+.button:hover
+{
+    background-color: #4cc82a;
+}
+
+.button.button-danger
+{
+    background-color: #a62a08;
+}
+
+.button.button-danger:hover
+{
+    background-color: #c84c2a;
+}
+
+span.meter
+{
+    background-color:  white;
+    height: 20px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: 5px;
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+span.meter span.bar
+{
+    float: left;
+    background-color: #2aa608;
+    height: 20px;
+}
+
+#torrentform
+{
+    padding: 10px;
+    margin: 10px;
+    background-color: #ddd;
+    width: 680px;
+}
+
+#torrentform label
+{
+    padding-right:10px;
+}
+
+input[type=text]
+{
+    border: 0;
+    height: 26px;
+    border-radius: 2px;
+    font-family: pjot-pi;
+    font-size: 16px;
+    padding: 2px 8px;
+}
+
+input[type=submit]
+{
+    border: 0;
+    color: white;
+    font-family: pjot-pi;
+    font-size: 16px;
+    padding: 7px 8px;
+}
+
+.subtitles_form label
+{
+    width: 150px;
+    text-align: right;
+    padding: 10px;
+    display: inline-block;
+}
+
+.subtitles_form input[type=submit]
+{
+    margin: 10px 176px; 
+}
+
+.subtitles_form input[type=file]
+{
+    font-family: pjot-pi;
+    font-size: 15px;
+}
+
