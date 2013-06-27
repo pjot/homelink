@@ -9,7 +9,7 @@ class Deluge
 		$success = preg_match('/Torrent\sadded!\n$/m', $ret) === 1;
 		if ( ! $success)
 		{
-			error_log('Error when adding torrent: ' . $ret);
+			error_log('Error when adding torrent to Deluge: ' . $ret);
 		}
 		return $success;
 	}

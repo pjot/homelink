@@ -69,6 +69,11 @@ a
     background-color: #2aa608;
 }
 
+.banner.banner-error
+{
+    background-color: #a62a08;
+}
+
 .banner a.close
 {
     color: white;
